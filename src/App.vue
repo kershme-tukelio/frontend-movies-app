@@ -1,12 +1,22 @@
 <template>
 	<div id="app">
-		<div id="nav">
-			<router-link to="/"> Movies </router-link> |
-			<router-link to="/login" > Login </router-link>
-		</div>
+		<main-header/>
 		<router-view/>
 	</div>
 </template>
+
+<script>
+import MainHeader from './components/MainHeader.vue'
+// import { mapActions } from 'vuex'
+
+export default {
+	components: { MainHeader },
+	methods: {
+		
+	}
+}
+</script>
+
 
 <style>
 #app {

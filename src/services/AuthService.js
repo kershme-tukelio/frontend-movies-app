@@ -16,6 +16,10 @@ class AuthService
         const response = await http.post('/logout')
         return response.data;
     }
+    async getMyProfile() {
+        const response = await http.get('/me')
+        return response.data;
+    }
 }
 
 const authService = new AuthService()

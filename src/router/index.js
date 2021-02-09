@@ -24,13 +24,13 @@ const routes = [
   }
 ];
 
-function authGuard(to, from, next) {
-  if (localStorage.getItem('token')) {
-    next()
-  } else {
-    next('/')
-  }
-}
+// function authGuard(to, from, next) {
+//   if (localStorage.getItem('token')) {
+//     next()
+//   } else {
+//     next('/')
+//   }
+// }
 
 const router = new VueRouter({
   mode: 'history',
@@ -38,12 +38,12 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (this.$router.meta.isAuthRequired) {
-    return authGuard(to, from, next)
-  } else {
-    return 
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (this.$router.meta.isAuthRequired) {
+//     return authGuard(to, from, next)
+//   } else {
+//     return 
+//   }
+// })
 
 export default router
