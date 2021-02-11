@@ -8,7 +8,7 @@
 			<input required v-model="credentials.password" id="password" type="password"> <br/><br/>
 
 			<button type="submit"> Submit </button>
-			<p v-if="loginFailed" style="color: red" >Invalid credentials</p>
+			<!-- <p v-if="loginFailed" style="color: red" >Invalid credentials</p> -->
 		</form>
 		<div>
 			<h3>Name: {{activeUser.name}}</h3>
@@ -27,7 +27,7 @@ export default {
 		return {
 			credentials: {
 				email: "",
-				password: ""
+				password: "",
 			}
 		}
 	},
@@ -37,16 +37,16 @@ export default {
 	},
 	methods: {
 		async handleSubmit() {
-			this.loginFailed = false
+			// this.loginFailed = false
 			try {
 				await this.$store.dispatch('login', this.credentials)
 				console.log('user ulogovan')
 			} 
 			catch(error) {
 				console.log('invalid credentials')
-				this.loginFailed = true
+				// this.loginFailed = true
 			}
-			// this.$router.push('/movies')
+			this.$router.push('/movies')
 		},
 		resetCounter() {
 			this.setCounter = 0;

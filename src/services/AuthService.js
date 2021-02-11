@@ -4,7 +4,7 @@ class AuthService
 {
     async register(credentials) {
         const response = await http.post('/register', credentials)
-        return response.data;
+        return response.data; 
     }
 
     async login(credentials) {

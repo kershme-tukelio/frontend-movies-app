@@ -1,7 +1,8 @@
 <template>
     <div id="nav">
         <router-link to="/"> Movies </router-link> |
-        <router-link to="/login" > Login </router-link> |
+        <span v-if="isAuthenticated" @click="handleLogout"> Logout </span>
+        <router-link v-else to="/login" > Login </router-link> |
         <span> {{activeUser.name}} </span>
 	</div>
 </template>
@@ -11,13 +12,13 @@ import {mapGetters, mapActions} from 'vuex'
 export default {
     name: 'main-header',
     computed: {
-        ...mapGetters(['activeUser'])
+        ...mapGetters(['activeUser', 'isAuthenticated'])
     },
     methods: {
         ...mapActions(['logout']),
         async handleLogout() {
-            await this.logout;
-            this.$router.push('/login')
+            await this.logout();
+            this.$router.push('/login');
         }
     }
 }

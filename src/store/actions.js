@@ -9,13 +9,17 @@ export const actions = {
             store.commit('setToken', token)
         },
         async getActiveUser(store) {
-            const activeUser = await authService.getMyProfile()
-            store.commit('setActiveUser', activeUser)
+            if (store.getters.isAuthenticated) {
+                const activeUser = await authService.getMyProfile()
+                store.commit('setActiveUser', activeUser)
+            } else {
+                store.commit('setActiveUser', {})                
+            }
         },
         async logout(store) {
-            await authService.logout
+            await authService.logout()
+            localStorage.setItem('token', null)
             store.commit('setToken', null)
             store.commit('setActiveUser', {})
-            store.commit()
         }
 }
