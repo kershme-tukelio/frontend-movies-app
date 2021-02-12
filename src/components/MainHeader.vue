@@ -3,12 +3,13 @@
         <router-link to="/"> Movies </router-link> |
         <span v-if="isAuthenticated" @click="handleLogout"> Logout </span>
         <router-link v-else to="/login" > Login </router-link> |
-        <span> {{activeUser.name}} </span>
+        <span v-if="isAuthenticated" > {{activeUser.name}} </span>
+        <router-link v-else to="/register" > Register </router-link>
 	</div>
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
     name: 'main-header',
     computed: {

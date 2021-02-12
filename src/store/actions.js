@@ -3,7 +3,7 @@ import authService from '../services/AuthService'
 
 export const actions = {
         async login(store, credentials) {
-            const {user, token} = await authService.login(credentials)
+            const { user, token } = await authService.login(credentials)
             localStorage.setItem('token', JSON.stringify(token))
             store.commit('setActiveUser', user)
             store.commit('setToken', token)
@@ -21,5 +21,11 @@ export const actions = {
             localStorage.setItem('token', null)
             store.commit('setToken', null)
             store.commit('setActiveUser', {})
+        },
+        async register(store, credentials) {
+            await authService.register(credentials)
+            // localStorage.setItem('token', JSON.stringify(token))
+            // store.commit('setActiveUser', user)
+            // store.commit('setToken', token)
         }
 }

@@ -8,19 +8,14 @@
 			<input required v-model="credentials.password" id="password" type="password"> <br/><br/>
 
 			<button type="submit"> Submit </button>
-			<!-- <p v-if="loginFailed" style="color: red" >Invalid credentials</p> -->
+			<p v-if="requestFailed" style="color: red" >Invalid credentials</p>
 		</form>
-		<div>
-			<h3>Name: {{activeUser.name}}</h3>
-			<h3>Email: {{activeUser.email}}</h3>
-		</div>
 	</div>
 </template>
 
 <script>
 // import authService from '../services/AuthService'
 import { mapGetters, mapActions } from 'vuex'
-import { mapMutations } from 'vuex'
 
 export default {
 	data() {
@@ -32,31 +27,25 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['counter', 'doubledCounter', 'activeUser']),
-		...mapMutations(['incrementCounter', 'setCounter'])
+		...mapGetters(['activeUser']),
 	},
 	methods: {
 		async handleSubmit() {
 			// this.loginFailed = false
 			try {
 				await this.$store.dispatch('login', this.credentials)
-				console.log('user ulogovan')
+				console.log('USER ULOGOVAN')
+				this.$router.push('/movies')
 			} 
 			catch(error) {
-				console.log('invalid credentials')
-				// this.loginFailed = true
+				const requestFailed = true
+				console.log(error.response.data.message)
+				this.credentials.email = ""
+				this.credentials.password = ""
 			}
-			this.$router.push('/movies')
-		},
-		resetCounter() {
-			this.setCounter = 0;
 		},
 		...mapActions(['login', 'getActiveUser'])
-	},
-	created() {
-		console.log({store: this.store})
-		console.log('counter is ', this.counter)
-	},
+	}
 }
 </script>
 
